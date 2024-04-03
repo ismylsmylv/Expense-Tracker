@@ -1,12 +1,9 @@
-import { useState } from "react";
 import "./style.scss";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="container">
-      <div className="welcome">Expence Tracker</div>
+      <div className="welcome">Expense Tracker</div>
       <div className="balance">
         <div className="heading">your balance</div>
         <div className="amount">$260.00</div>
@@ -23,13 +20,22 @@ function App() {
         </div>
       </div>
       <div className="history">
-        <div className="heading">history</div>
+        <div className="heading">History</div>
         <div className="line"></div>
         <div className="list">
           <div className="card income">
             <div className="name">cash</div>
             <div className="price">+500</div>
           </div>
+          <div className="card income">
+            <div className="name">cash</div>
+            <div className="price">+500</div>
+          </div>
+          <div className="card income">
+            <div className="name">cash</div>
+            <div className="price">+500</div>
+          </div>
+
           <div className="card expense">
             <div className="name">book</div>
             <div className="price">-40</div>
@@ -41,18 +47,27 @@ function App() {
         </div>
       </div>
       <form className="addNew">
-        <div className="heading">add new transaction</div>
+        <div className="heading">Add new transaction</div>
         <div className="line"></div>
         <div className="nameInput">
-          <div className="head">text</div>
-          <input type="text" placeholder="Enter text..." />
+          <label className="head" htmlFor="name">
+            text
+          </label>
+          <br />
+
+          <input type="text" placeholder="Enter text..." id="name" />
         </div>
         <div className="priceInput">
-          <div className="head">amount</div>
-          <div className="explain">(negative - expense, positive - income)</div>
-          <input type="number" placeholder="Enter amount..." />
+          <label className="head" htmlFor="amount">
+            amount
+          </label>
+          <br />
+          <label htmlFor="amount" className="explain">
+            (negative - expense, positive - income)
+          </label>
+          <input type="number" placeholder="Enter amount..." id="amount" />
         </div>
-        <button>add transaction</button>
+        <button>Add transaction</button>
       </form>
     </div>
   );
