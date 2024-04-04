@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 interface elem {
@@ -25,13 +25,6 @@ function App() {
   const [expenses, setexpenses] = useState(0);
   const [income, setincome] = useState(0);
   const [balanceUpdater, setbalanceUpdater] = useState(false);
-  useEffect(() => {
-    // total.map((elem: elem) => {
-    //   elem.type == "expense"
-    //     ? setexpenses(expenses + Number(elem.price))
-    //     : setincome(income + Number(elem.price));
-    // });
-  }, [balanceUpdater]);
   return (
     <div className="container">
       <div className="welcome">Expense Tracker</div>
