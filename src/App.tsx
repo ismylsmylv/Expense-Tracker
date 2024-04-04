@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./style.scss";
 import { v4 as uuidv4 } from "uuid";
-
+interface elem {
+  name: string;
+  price: string;
+  type: string;
+}
 function App() {
   const [total, settotal] = useState([]);
   const [inputName, setinputName] = useState("");
@@ -29,7 +33,7 @@ function App() {
         <div className="line"></div>
         <div className="list">
           {total.length > 0 ? (
-            total.map((elem) => {
+            total.map((elem: elem) => {
               return (
                 <div
                   className={
@@ -39,7 +43,8 @@ function App() {
                 >
                   <div className="name">{elem.name}</div>
                   <div className="price">
-                    {elem.type == "expense" ? "-" : "+"}
+                    {/* {elem.type == "expense" ? "-" : "+"} */}
+                    {elem.type == "income" && "+"}
                     {elem.price}
                   </div>
                 </div>
@@ -90,15 +95,24 @@ function App() {
         <button
           onClick={(e) => {
             e.preventDefault();
-            const inputType = inputPrice;
-            const obj = {
-              name: inputName,
-              price: inputPrice,
-              type: inputType,
-            };
-            setinputName("");
-            setinputPrice("");
-            settotal([...total, obj]);
+            if (inputName == "") {
+              alert("Please enter transaction name");
+            } else if (inputPrice == "") {
+              alert("Please enter transaction amount");
+            } else {
+              console.log(inputPrice);
+              const inputType =
+                inputPrice.charAt(0) == "-" ? "expense" : "income";
+              const obj = {
+                name: inputName,
+                price: inputPrice,
+                type: inputType,
+              };
+              console.log(obj);
+              setinputName("");
+              setinputPrice("");
+              settotal([...total, obj]);
+            }
           }}
         >
           Add transaction
