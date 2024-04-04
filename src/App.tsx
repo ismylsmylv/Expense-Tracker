@@ -1,6 +1,11 @@
+import { useState } from "react";
 import "./style.scss";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  const [total, settotal] = useState([]);
+  const [inputName, setinputName] = useState("");
+  const [inputPrice, setinputPrice] = useState("");
   return (
     <div className="container">
       <div className="welcome">Expense Tracker</div>
@@ -23,27 +28,26 @@ function App() {
         <div className="heading">History</div>
         <div className="line"></div>
         <div className="list">
-          <div className="card income">
-            <div className="name">cash</div>
-            <div className="price">+500</div>
-          </div>
-          <div className="card income">
-            <div className="name">cash</div>
-            <div className="price">+500</div>
-          </div>
-          <div className="card income">
-            <div className="name">cash</div>
-            <div className="price">+500</div>
-          </div>
-
-          <div className="card expense">
-            <div className="name">book</div>
-            <div className="price">-40</div>
-          </div>
-          <div className="card expense">
-            <div className="name">camera</div>
-            <div className="price">-200</div>
-          </div>
+          {total.length > 0 ? (
+            total.map((elem) => {
+              return (
+                <div
+                  className={
+                    elem.type == "expense" ? "card expense" : "card income"
+                  }
+                  key={uuidv4()}
+                >
+                  <div className="name">{elem.name}</div>
+                  <div className="price">
+                    {elem.type == "expense" ? "-" : "+"}
+                    {elem.price}
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p>Nothing to show here</p>
+          )}
         </div>
       </div>
       <form className="addNew">
@@ -55,7 +59,15 @@ function App() {
           </label>
           <br />
 
-          <input type="text" placeholder="Enter text..." id="name" />
+          <input
+            value={inputName}
+            type="text"
+            placeholder="Enter text..."
+            id="name"
+            onChange={(e) => {
+              setinputName(e.target.value);
+            }}
+          />
         </div>
         <div className="priceInput">
           <label className="head" htmlFor="amount">
@@ -65,9 +77,32 @@ function App() {
           <label htmlFor="amount" className="explain">
             (negative - expense, positive - income)
           </label>
-          <input type="number" placeholder="Enter amount..." id="amount" />
+          <input
+            value={inputPrice}
+            type="number"
+            placeholder="Enter amount..."
+            id="amount"
+            onChange={(e) => {
+              setinputPrice(e.target.value);
+            }}
+          />
         </div>
-        <button>Add transaction</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            const inputType = inputPrice;
+            const obj = {
+              name: inputName,
+              price: inputPrice,
+              type: inputType,
+            };
+            setinputName("");
+            setinputPrice("");
+            settotal([...total, obj]);
+          }}
+        >
+          Add transaction
+        </button>
       </form>
     </div>
   );
