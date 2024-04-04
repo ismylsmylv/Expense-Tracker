@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.scss";
 import { v4 as uuidv4 } from "uuid";
 interface elem {
@@ -6,26 +6,43 @@ interface elem {
   price: string;
   type: string;
 }
+interface total {
+  name: string;
+  price: string;
+  type: string;
+}
+
 function App() {
-  const [total, settotal] = useState([]);
+  const [total, settotal] = useState([] as unknown | total);
   const [inputName, setinputName] = useState("");
   const [inputPrice, setinputPrice] = useState("");
+  const [balance, setbalance] = useState(0);
+  const [expenses, setexpenses] = useState(0);
+  const [income, setincome] = useState(0);
+  const [balanceUpdater, setbalanceUpdater] = useState(false);
+  useEffect(() => {
+    // total.map((elem: elem) => {
+    //   elem.type == "expense"
+    //     ? setexpenses(expenses + Number(elem.price))
+    //     : setincome(income + Number(elem.price));
+    // });
+  }, [balanceUpdater]);
   return (
     <div className="container">
       <div className="welcome">Expense Tracker</div>
       <div className="balance">
         <div className="heading">your balance</div>
-        <div className="amount">$260.00</div>
+        <div className="amount">${balance}</div>
       </div>
       <div className="summary">
         <div className="incomes summaryCard">
           <div className="heading">income</div>
-          <div className="amount plus">$500.00</div>
+          <div className="amount plus">${income}</div>
         </div>
         <div className="divider"></div>
         <div className="expenses summaryCard">
           <div className="heading">expense</div>
-          <div className="amount minus">$240.00</div>
+          <div className="amount minus">${expenses}</div>
         </div>
       </div>
       <div className="history">
@@ -95,23 +112,29 @@ function App() {
         <button
           onClick={(e) => {
             e.preventDefault();
-            if (inputName == "") {
+            if (inputName.trim() == "") {
               alert("Please enter transaction name");
-            } else if (inputPrice == "") {
+            } else if (inputPrice.trim() == "") {
               alert("Please enter transaction amount");
             } else {
               console.log(inputPrice);
               const inputType =
                 inputPrice.charAt(0) == "-" ? "expense" : "income";
               const obj = {
-                name: inputName,
-                price: inputPrice,
+                name: inputName.trim(),
+                price: inputPrice.trim(),
                 type: inputType,
               };
               console.log(obj);
+              // inputType == "expense"
+              //   ? setbalance(balance - Number(obj.price))
+              // :
+              setbalance(balance + Number(obj.price));
+
               setinputName("");
               setinputPrice("");
               settotal([...total, obj]);
+              setbalanceUpdater(!balanceUpdater);
             }
           }}
         >
