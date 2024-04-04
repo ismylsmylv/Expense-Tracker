@@ -130,7 +130,9 @@ function App() {
               //   ? setbalance(balance - Number(obj.price))
               // :
               setbalance(balance + Number(obj.price));
-
+              inputType == "expense"
+                ? setexpenses(expenses + Number(obj.price))
+                : setincome(income + Number(obj.price));
               setinputName("");
               setinputPrice("");
               settotal([...total, obj]);
