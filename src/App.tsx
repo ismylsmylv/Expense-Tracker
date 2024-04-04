@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Helmet } from "react-helmet";
 import "./style.scss";
 interface elem {
   name: string;
@@ -27,6 +28,11 @@ function App() {
   const [balanceUpdater, setbalanceUpdater] = useState(false);
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Expense Tracker</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <div className="welcome">Expense Tracker</div>
       <div className="balance">
         <div className="heading">your balance</div>
