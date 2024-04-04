@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import "./style.scss";
 import { v4 as uuidv4 } from "uuid";
+import "./style.scss";
 interface elem {
   name: string;
   price: string;
   type: string;
 }
 interface total {
+  length: number;
+  map(
+    arg0: (elem: elem) => import("react/jsx-runtime").JSX.Element
+  ): import("react").ReactNode;
   name: string;
   price: string;
   type: string;
+  obj: object;
 }
 
 function App() {
-  const [total, settotal] = useState([] as unknown | total);
+  const [total, settotal] = useState([] as unknown as total);
   const [inputName, setinputName] = useState("");
   const [inputPrice, setinputPrice] = useState("");
   const [balance, setbalance] = useState(0);
