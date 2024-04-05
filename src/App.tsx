@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { v4 as uuidv4 } from "uuid";
 import { FaTrash } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 interface elem {
   name: string;
@@ -20,16 +20,12 @@ interface total {
 }
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [editObj, seteditObj] = useState({});
-
   const [total, settotal] = useState([] as unknown as total);
   const [inputName, setinputName] = useState("");
   const [inputPrice, setinputPrice] = useState("");
   const [balance, setbalance] = useState(0);
   const [expenses, setexpenses] = useState(0);
   const [income, setincome] = useState(0);
-  const [balanceUpdater, setbalanceUpdater] = useState(false);
   return (
     <div className="container">
       <Helmet>
@@ -92,16 +88,16 @@ function App() {
                       style={{ color: "white" }}
                       onClick={() => {
                         if (confirm("Are you sure to delete?")) {
-                          const removedTotal = total.filter((element) => {
+                          const removedTotal = total.filter((element: elem) => {
                             return element.name != elem.name;
                           });
                           console.log(removedTotal);
                           settotal(removedTotal);
-                          setbalance(balance - elem.price);
+                          setbalance(balance - Number(elem.price));
                           if (elem.type == "income") {
-                            setincome(income - elem.price);
+                            setincome(income - Number(elem.price));
                           } else {
-                            setexpenses(expenses - elem.price);
+                            setexpenses(expenses - Number(elem.price));
                           }
                         } else {
                           console.log(total);
@@ -109,7 +105,31 @@ function App() {
                       }}
                     />
 
-                    <div className="price">
+                    <div
+                      className="price"
+                      onClick={() => {
+                        const newPrice = prompt("Enter new price");
+                        console.log(newPrice, "newPrice");
+                        const updatedTotal = total.filter((element: elem) => {
+                          if (element.name == elem.name) {
+                            return (elem.price = newPrice);
+                          } else {
+                            return element;
+                          }
+                        });
+                        console.log(updatedTotal, "updatedTotal");
+                        if (elem.type == "income") {
+                          const updatedIncome =
+                            income - Number(elem.price) + Number(newPrice);
+                          setincome(updatedIncome);
+                        } else {
+                          const updatedExpense =
+                            expenses + Number(elem.price) - Number(newPrice);
+                          setexpenses(updatedExpense);
+                        }
+                        settotal(updatedTotal);
+                      }}
+                    >
                       {/* {elem.type == "expense" ? "-" : "+"} */}
                       {elem.type == "income" && "+"}
                       {elem.price}
@@ -177,9 +197,6 @@ function App() {
                 type: inputType,
               };
               console.log(obj);
-              // inputType == "expense"
-              //   ? setbalance(balance - Number(obj.price))
-              // :
               setbalance(balance + Number(obj.price));
               inputType == "expense"
                 ? setexpenses(expenses + Number(obj.price))
@@ -187,7 +204,6 @@ function App() {
               setinputName("");
               setinputPrice("");
               settotal([...total, obj]);
-              setbalanceUpdater(!balanceUpdater);
             }
           }}
         >
