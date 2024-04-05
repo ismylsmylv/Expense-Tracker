@@ -76,11 +76,13 @@ function App() {
                       console.log(newName, "newName");
                       const updatedTotal = total.filter((element) => {
                         if (element.name == elem.name) {
-                          elem.name = newName;
+                          return (elem.name = newName);
+                        } else {
+                          return element;
                         }
                       });
                       console.log(updatedTotal, "updatedTotal");
-                      // settotal(updatedTotal);
+                      settotal(updatedTotal);
                     }}
                   >
                     {elem.name}
