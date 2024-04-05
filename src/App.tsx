@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { v4 as uuidv4 } from "uuid";
+import { FaTrash } from "react-icons/fa";
 import "./style.scss";
 interface elem {
   name: string;
@@ -60,19 +61,57 @@ function App() {
             total.map((elem: elem) => {
               return (
                 <div
-                  onClick={() => {
-                    seteditObj(elem);
-                  }}
+                  // onClick={() => {
+                  //   seteditObj(elem);
+                  // }}
                   className={
                     elem.type == "expense" ? "card expense" : "card income"
                   }
                   key={uuidv4()}
                 >
-                  <div className="name">{elem.name}</div>
-                  <div className="price">
-                    {/* {elem.type == "expense" ? "-" : "+"} */}
-                    {elem.type == "income" && "+"}
-                    {elem.price}
+                  <div
+                    className="name"
+                    onClick={() => {
+                      const newName = prompt("Enter new name");
+                      console.log(newName, "newName");
+                      const updatedTotal = total.filter((element) => {
+                        if (element.name == elem.name) {
+                          elem.name = newName;
+                        }
+                      });
+                      console.log(updatedTotal, "updatedTotal");
+                      // settotal(updatedTotal);
+                    }}
+                  >
+                    {elem.name}
+                  </div>
+                  <div className="right">
+                    <FaTrash
+                      style={{ color: "white" }}
+                      onClick={() => {
+                        if (confirm("Are you sure to delete?")) {
+                          const removedTotal = total.filter((element) => {
+                            return element.name != elem.name;
+                          });
+                          console.log(removedTotal);
+                          settotal(removedTotal);
+                          setbalance(balance - elem.price);
+                          if (elem.type == "income") {
+                            setincome(income - elem.price);
+                          } else {
+                            setexpenses(expenses - elem.price);
+                          }
+                        } else {
+                          console.log(total);
+                        }
+                      }}
+                    />
+
+                    <div className="price">
+                      {/* {elem.type == "expense" ? "-" : "+"} */}
+                      {elem.type == "income" && "+"}
+                      {elem.price}
+                    </div>
                   </div>
                 </div>
               );
