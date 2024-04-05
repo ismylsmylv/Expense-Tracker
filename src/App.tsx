@@ -187,7 +187,7 @@ function App() {
             e.preventDefault();
             if (inputName.trim() == "") {
               alert("Please enter transaction name");
-            } else if (inputPrice.trim() == "") {
+            } else if (inputPrice.trim() == "" || Number(inputPrice) == 0) {
               alert("Please enter transaction amount");
             } else {
               console.log(inputPrice);

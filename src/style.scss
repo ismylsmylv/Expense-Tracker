@@ -23,6 +23,9 @@
         // padding: 20px 0;
         width: 100%;
         font-weight: 700;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        word-break: break-word;
 
         .amount {
             font-weight: bold;
@@ -68,6 +71,9 @@
             .amount {
                 font-size: 20px;
                 font-weight: 600;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                word-break: break-word;
             }
 
             .minus {
