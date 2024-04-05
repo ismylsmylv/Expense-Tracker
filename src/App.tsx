@@ -9,6 +9,7 @@ interface elem {
   type: string;
 }
 interface total {
+  filter: any;
   length: number;
   map(
     arg0: (elem: elem) => import("react/jsx-runtime").JSX.Element
@@ -71,7 +72,7 @@ function App() {
                       const newName = prompt("Enter new name");
                       if (newName) {
                         console.log(newName, "newName");
-                        const updatedTotal = total.filter((element) => {
+                        const updatedTotal = total.filter((element: elem) => {
                           if (element.name == elem.name) {
                             return (elem.name = newName);
                           } else {
@@ -205,7 +206,7 @@ function App() {
                 : setincome(income + Number(obj.price));
               setinputName("");
               setinputPrice("");
-              settotal([...total, obj]);
+              settotal([...total, obj] as unknown as total);
             }
           }}
         >
