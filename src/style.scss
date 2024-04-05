@@ -100,6 +100,12 @@
                 background-color: white;
                 border-radius: 5px;
                 border-right: 5px solid;
+                cursor: pointer;
+                transition: 200ms linear;
+
+                &:hover {
+                    color: white;
+                }
 
                 .name {
                     text-transform: capitalize;
@@ -108,10 +114,18 @@
 
             .income {
                 border-color: #48CE76;
+
+                &:hover {
+                    background-color: #48CE76;
+                }
             }
 
             .expense {
                 border-color: #bd0d15;
+
+                &:hover {
+                    background-color: #bd0d15;
+                }
             }
         }
     }

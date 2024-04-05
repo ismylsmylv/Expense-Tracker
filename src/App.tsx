@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { Helmet } from "react-helmet";
+import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 interface elem {
   name: string;
@@ -19,6 +19,9 @@ interface total {
 }
 
 function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [editObj, seteditObj] = useState({});
+
   const [total, settotal] = useState([] as unknown as total);
   const [inputName, setinputName] = useState("");
   const [inputPrice, setinputPrice] = useState("");
@@ -57,6 +60,9 @@ function App() {
             total.map((elem: elem) => {
               return (
                 <div
+                  onClick={() => {
+                    seteditObj(elem);
+                  }}
                   className={
                     elem.type == "expense" ? "card expense" : "card income"
                   }
