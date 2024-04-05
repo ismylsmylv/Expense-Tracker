@@ -69,16 +69,18 @@ function App() {
                     className="name"
                     onClick={() => {
                       const newName = prompt("Enter new name");
-                      console.log(newName, "newName");
-                      const updatedTotal = total.filter((element) => {
-                        if (element.name == elem.name) {
-                          return (elem.name = newName);
-                        } else {
-                          return element;
-                        }
-                      });
-                      console.log(updatedTotal, "updatedTotal");
-                      settotal(updatedTotal);
+                      if (newName) {
+                        console.log(newName, "newName");
+                        const updatedTotal = total.filter((element) => {
+                          if (element.name == elem.name) {
+                            return (elem.name = newName);
+                          } else {
+                            return element;
+                          }
+                        });
+                        console.log(updatedTotal, "updatedTotal");
+                        settotal(updatedTotal);
+                      }
                     }}
                   >
                     {elem.name}
@@ -107,28 +109,28 @@ function App() {
 
                     <div
                       className="price"
-                      onClick={() => {
-                        const newPrice = prompt("Enter new price");
-                        console.log(newPrice, "newPrice");
-                        const updatedTotal = total.filter((element: elem) => {
-                          if (element.name == elem.name) {
-                            return (elem.price = newPrice);
-                          } else {
-                            return element;
-                          }
-                        });
-                        console.log(updatedTotal, "updatedTotal");
-                        if (elem.type == "income") {
-                          const updatedIncome =
-                            income - Number(elem.price) + Number(newPrice);
-                          setincome(updatedIncome);
-                        } else {
-                          const updatedExpense =
-                            expenses + Number(elem.price) - Number(newPrice);
-                          setexpenses(updatedExpense);
-                        }
-                        settotal(updatedTotal);
-                      }}
+                      // onClick={() => {
+                      //   const newPrice = prompt("Enter new price");
+                      //   console.log(newPrice, "newPrice");
+                      //   const updatedTotal = total.filter((element: elem) => {
+                      //     if (element.name == elem.name) {
+                      //       return (elem.price = newPrice);
+                      //     } else {
+                      //       return element;
+                      //     }
+                      //   });
+                      //   console.log(updatedTotal, "updatedTotal");
+                      //   if (elem.type == "income") {
+                      //     const updatedIncome =
+                      //       income - Number(elem.price) + Number(newPrice);
+                      //     setincome(updatedIncome);
+                      //   } else {
+                      //     const updatedExpense =
+                      //       expenses + Number(elem.price) - Number(newPrice);
+                      //     setexpenses(updatedExpense);
+                      //   }
+                      //   settotal(updatedTotal);
+                      // }}
                     >
                       {/* {elem.type == "expense" ? "-" : "+"} */}
                       {elem.type == "income" && "+"}
