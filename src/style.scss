@@ -109,8 +109,16 @@
                 cursor: pointer;
                 transition: 200ms linear;
 
+                .trashIcon {
+                    display: none;
+                }
+
                 &:hover {
                     color: white;
+
+                    .trashIcon {
+                        display: block;
+                    }
                 }
 
                 .name {

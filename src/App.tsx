@@ -88,6 +88,7 @@ function App() {
                   </div>
                   <div className="right">
                     <FaTrash
+                      className="trashIcon"
                       style={{ color: "white" }}
                       onClick={() => {
                         if (confirm("Are you sure to delete?")) {
