@@ -30,17 +30,28 @@ function App() {
   const [income, setincome] = useState(0);
 
   useEffect(() => {
-    axios("http://localhost:3000/datas/").then((res) => {
-      settotal(res.data);
-      console.log(total, "total");
-      total.length > 0 &&
-        total.map((element) => {
-          return element.type == "income"
-            ? setincome(income + Number(element.price))
-            : setexpenses(expenses + Number(element.price));
+    axios("http://localhost:3000/datas/")
+      .then((res) => {
+        settotal(res.data);
+        console.log(res.data, "total"); // Log the received data
+        let totalIncome = 0;
+        let totalExpenses = 0;
+        res.data.forEach((element) => {
+          if (element.type === "income") {
+            totalIncome += Number(element.price);
+          } else {
+            totalExpenses += Number(element.price);
+          }
         });
-    });
+        setincome(totalIncome);
+        setexpenses(totalExpenses);
+        setbalance(totalIncome + totalExpenses);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
+
   function editName(elem) {
     const newName = prompt("Enter new name");
     if (newName) {
