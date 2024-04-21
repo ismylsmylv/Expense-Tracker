@@ -23,6 +23,12 @@
       "name": "Moana Rivera",
       "price": "873",
       "type": "income"
+    },
+    {
+      "id": "35d9",
+      "name": "Timon Talley",
+      "price": "355",
+      "type": "income"
     }
   ]
 }

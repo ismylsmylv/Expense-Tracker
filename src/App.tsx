@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaTrash } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
@@ -28,6 +28,18 @@ function App() {
   const [balance, setbalance] = useState(0);
   const [expenses, setexpenses] = useState(0);
   const [income, setincome] = useState(0);
+  useEffect(() => {
+    axios("http://localhost:3000/datas/").then((res) => {
+      settotal(res.data);
+      console.log(total, "total");
+      total.length > 0 &&
+        total.map((element) => {
+          return element.type == "income"
+            ? setincome(income + Number(element.price))
+            : setexpenses(expenses + Number(element.price));
+        });
+    });
+  }, []);
   return (
     <div className="container">
       <Helmet>
