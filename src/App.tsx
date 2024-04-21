@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { FaTrash } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
+import axios from "axios";
 interface elem {
   name: string;
   price: string;
@@ -200,6 +201,7 @@ function App() {
                 price: inputPrice.trim(),
                 type: inputType,
               };
+              axios.post("http://localhost:3000/datas", obj);
               console.log(obj);
               setbalance(balance + Number(obj.price));
               inputType == "expense"

@@ -1,0 +1,28 @@
+{
+  "datas": [
+    {
+      "id": "5711",
+      "name": "Drew Berg",
+      "price": "916",
+      "type": "income"
+    },
+    {
+      "id": "c068",
+      "name": "Dillard",
+      "price": "508",
+      "type": "income"
+    },
+    {
+      "id": "3558",
+      "name": "Rhea Spears",
+      "price": "-880",
+      "type": "expense"
+    },
+    {
+      "id": "eeb0",
+      "name": "Moana Rivera",
+      "price": "873",
+      "type": "income"
+    }
+  ]
+}
