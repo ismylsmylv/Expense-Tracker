@@ -105,6 +105,9 @@ function App() {
                       style={{ color: "white" }}
                       onClick={() => {
                         if (confirm("Are you sure to delete?")) {
+                          axios.delete(
+                            "http://localhost:3000/datas/" + elem.id
+                          );
                           const removedTotal = total.filter((element: elem) => {
                             return element.name != elem.name;
                           });
