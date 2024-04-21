@@ -28,6 +28,7 @@ function App() {
   const [balance, setbalance] = useState(0);
   const [expenses, setexpenses] = useState(0);
   const [income, setincome] = useState(0);
+
   useEffect(() => {
     axios("http://localhost:3000/datas/").then((res) => {
       settotal(res.data);
@@ -40,6 +41,66 @@ function App() {
         });
     });
   }, []);
+  function editName(elem) {
+    const newName = prompt("Enter new name");
+    if (newName) {
+      console.log(newName, "newName");
+      const updatedTotal = total.filter((element: elem) => {
+        if (element.name == elem.name) {
+          return (elem.name = newName);
+        } else {
+          return element;
+        }
+      });
+      console.log(updatedTotal, "updatedTotal");
+      settotal(updatedTotal);
+      axios.patch("http://localhost:3000/datas/" + elem.id, {
+        name: newName,
+      });
+    }
+  }
+  function addExp() {
+    if (inputName.trim() == "") {
+      alert("Please enter transaction name");
+    } else if (inputPrice.trim() == "" || Number(inputPrice) == 0) {
+      alert("Please enter transaction amount");
+    } else {
+      console.log(inputPrice);
+      const inputType = inputPrice.charAt(0) == "-" ? "expense" : "income";
+      const obj = {
+        name: inputName.trim(),
+        price: inputPrice.trim(),
+        type: inputType,
+      };
+      axios.post("http://localhost:3000/datas", obj);
+      console.log(obj);
+      setbalance(balance + Number(obj.price));
+      inputType == "expense"
+        ? setexpenses(expenses + Number(obj.price))
+        : setincome(income + Number(obj.price));
+      setinputName("");
+      setinputPrice("");
+      settotal([...total, obj] as unknown as total);
+    }
+  }
+  function deleteExp(elem) {
+    if (confirm("Are you sure to delete?")) {
+      axios.delete("http://localhost:3000/datas/" + elem.id);
+      const removedTotal = total.filter((element: elem) => {
+        return element.name != elem.name;
+      });
+      console.log(removedTotal);
+      settotal(removedTotal);
+      setbalance(balance - Number(elem.price));
+      if (elem.type == "income") {
+        setincome(income - Number(elem.price));
+      } else {
+        setexpenses(expenses - Number(elem.price));
+      }
+    } else {
+      console.log(total);
+    }
+  }
   return (
     <div className="container">
       <Helmet>
@@ -82,22 +143,7 @@ function App() {
                   <div
                     className="name"
                     onClick={() => {
-                      const newName = prompt("Enter new name");
-                      if (newName) {
-                        console.log(newName, "newName");
-                        const updatedTotal = total.filter((element: elem) => {
-                          if (element.name == elem.name) {
-                            return (elem.name = newName);
-                          } else {
-                            return element;
-                          }
-                        });
-                        console.log(updatedTotal, "updatedTotal");
-                        settotal(updatedTotal);
-                        axios.patch("http://localhost:3000/datas/" + elem.id, {
-                          name: newName,
-                        });
-                      }
+                      editName(elem);
                     }}
                   >
                     {elem.name}
@@ -107,24 +153,7 @@ function App() {
                       className="trashIcon"
                       style={{ color: "white" }}
                       onClick={() => {
-                        if (confirm("Are you sure to delete?")) {
-                          axios.delete(
-                            "http://localhost:3000/datas/" + elem.id
-                          );
-                          const removedTotal = total.filter((element: elem) => {
-                            return element.name != elem.name;
-                          });
-                          console.log(removedTotal);
-                          settotal(removedTotal);
-                          setbalance(balance - Number(elem.price));
-                          if (elem.type == "income") {
-                            setincome(income - Number(elem.price));
-                          } else {
-                            setexpenses(expenses - Number(elem.price));
-                          }
-                        } else {
-                          console.log(total);
-                        }
+                        deleteExp(elem);
                       }}
                     />
 
@@ -206,29 +235,7 @@ function App() {
         <button
           onClick={(e) => {
             e.preventDefault();
-            if (inputName.trim() == "") {
-              alert("Please enter transaction name");
-            } else if (inputPrice.trim() == "" || Number(inputPrice) == 0) {
-              alert("Please enter transaction amount");
-            } else {
-              console.log(inputPrice);
-              const inputType =
-                inputPrice.charAt(0) == "-" ? "expense" : "income";
-              const obj = {
-                name: inputName.trim(),
-                price: inputPrice.trim(),
-                type: inputType,
-              };
-              axios.post("http://localhost:3000/datas", obj);
-              console.log(obj);
-              setbalance(balance + Number(obj.price));
-              inputType == "expense"
-                ? setexpenses(expenses + Number(obj.price))
-                : setincome(income + Number(obj.price));
-              setinputName("");
-              setinputPrice("");
-              settotal([...total, obj] as unknown as total);
-            }
+            addExp();
           }}
         >
           Add transaction
