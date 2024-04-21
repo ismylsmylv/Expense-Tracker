@@ -94,6 +94,9 @@ function App() {
                         });
                         console.log(updatedTotal, "updatedTotal");
                         settotal(updatedTotal);
+                        axios.patch("http://localhost:3000/datas/" + elem.id, {
+                          name: newName,
+                        });
                       }
                     }}
                   >
