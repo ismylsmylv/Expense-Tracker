@@ -7,12 +7,6 @@
       "type": "income"
     },
     {
-      "id": "9cee",
-      "name": "Brielle Reed",
-      "price": "653",
-      "type": "income"
-    },
-    {
       "id": "4c00",
       "name": "Quyn Frost",
       "price": "-821",
@@ -23,6 +17,12 @@
       "name": "Kiona Levine",
       "price": "911",
       "type": "income"
+    },
+    {
+      "id": "ab80",
+      "name": "Kylie Cunningham",
+      "price": "-652",
+      "type": "expense"
     }
   ]
 }

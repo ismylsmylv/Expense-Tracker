@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import "./style.scss";
 import axios from "axios";
+import Tracker from "./components/tracker";
 interface elem {
   name: string;
   price: string;
@@ -120,21 +121,7 @@ function App() {
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
       <div className="welcome">Expense Tracker</div>
-      <div className="balance">
-        <div className="heading">your balance</div>
-        <div className="amount">${balance}</div>
-      </div>
-      <div className="summary">
-        <div className="incomes summaryCard">
-          <div className="heading">income</div>
-          <div className="amount plus">${income}</div>
-        </div>
-        <div className="divider"></div>
-        <div className="expenses summaryCard">
-          <div className="heading">expense</div>
-          <div className="amount minus">${expenses}</div>
-        </div>
-      </div>
+      <Tracker expenses={expenses} income={income} balance={balance} />
       <div className="history">
         <div className="heading">History</div>
         <div className="line"></div>
