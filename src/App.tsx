@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { FaTrash } from "react-icons/fa";
 
-import "./style.scss";
 import axios from "axios";
-import Tracker from "./components/tracker";
 import Expense from "./components/expense";
 import Input from "./components/input";
+import Tracker from "./components/tracker";
+import "./style.scss";
 interface elem {
   name: string;
   price: string;
@@ -39,7 +38,7 @@ function App() {
         console.log(res.data, "total"); // Log the received data
         let totalIncome = 0;
         let totalExpenses = 0;
-        res.data.forEach((element) => {
+        res.data.forEach((element: { type: string; price: any }) => {
           if (element.type === "income") {
             totalIncome += Number(element.price);
           } else {
@@ -55,7 +54,7 @@ function App() {
       });
   }, []);
 
-  function editName(elem) {
+  function editName(elem: { name: string; id: string }) {
     const newName = prompt("Enter new name");
     if (newName) {
       console.log(newName, "newName");
@@ -97,7 +96,12 @@ function App() {
       settotal([...total, obj] as unknown as total);
     }
   }
-  function deleteExp(elem) {
+  function deleteExp(elem: {
+    id: string;
+    name: string;
+    price: any;
+    type: string;
+  }) {
     if (confirm("Are you sure to delete?")) {
       axios.delete("http://localhost:3000/datas/" + elem.id);
       const removedTotal = total.filter((element: elem) => {
@@ -132,7 +136,7 @@ function App() {
             total.map((elem: elem) => {
               return (
                 <Expense
-                  elem={elem}
+                  elem={elem as any}
                   editName={editName}
                   deleteExp={deleteExp}
                 />
@@ -145,10 +149,10 @@ function App() {
       </div>
       <Input
         inputName={inputName}
-        setinputName={setinputName}
+        setinputName={setinputName as any}
         inputPrice={inputPrice}
-        setinputPrice={setinputPrice}
-        addExp={addExp}
+        setinputPrice={setinputPrice as any}
+        addExp={addExp as any}
       />
     </div>
   );

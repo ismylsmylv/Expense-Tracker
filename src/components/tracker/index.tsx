@@ -1,6 +1,8 @@
-import React from "react";
-
-type Props = {};
+type Props = {
+  balance: number;
+  income: number;
+  expenses: number;
+};
 
 function Tracker({ balance, income, expenses }: Props) {
   return (

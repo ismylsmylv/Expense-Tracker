@@ -1,8 +1,15 @@
-import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-type Props = {};
-
+type Props = {
+  elem: elem;
+  editName: any;
+  deleteExp: any;
+};
+interface elem {
+  type: string;
+  price: number;
+  name: string;
+}
 function Expense({ elem, editName, deleteExp }: Props) {
   return (
     <div
