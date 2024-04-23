@@ -23,6 +23,12 @@
       "name": "Kelsie Walters",
       "price": "902",
       "type": "income"
+    },
+    {
+      "id": "2c0d",
+      "name": "Ivor Martin",
+      "price": "958",
+      "type": "income"
     }
   ]
 }
