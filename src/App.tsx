@@ -24,7 +24,7 @@ interface total {
 }
 
 function App() {
-  const [total, settotal] = useState([] as unknown as total);
+  const [total, settotal] = useState<any[]>([] as any);
   const [inputName, setinputName] = useState("");
   const [inputPrice, setinputPrice] = useState("");
   const [balance, setbalance] = useState(0);
@@ -93,7 +93,7 @@ function App() {
         : setincome(income + Number(obj.price));
       setinputName("");
       setinputPrice("");
-      settotal([...total, obj] as unknown as total);
+      settotal([...total, obj] as unknown as total as any);
     }
   }
   function deleteExp(elem: {

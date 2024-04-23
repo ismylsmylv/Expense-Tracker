@@ -1,9 +1,9 @@
 type Props = {
   inputName: string;
-  setinputName: void;
+  setinputName: any;
   inputPrice: string;
-  setinputPrice: void;
-  addExp: void;
+  setinputPrice: any;
+  addExp: any;
 };
 
 function Input({
