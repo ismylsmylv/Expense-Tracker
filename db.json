@@ -1,34 +1,10 @@
 {
   "datas": [
     {
-      "id": "4c00",
-      "name": "asdsafd",
-      "price": "-821",
+      "id": "bb9089f9-b17b-4adc-8d3d-e7ee2418a1ac",
+      "name": "Winifred Rowland",
+      "price": "-848",
       "type": "expense"
-    },
-    {
-      "id": "ab80",
-      "name": "Kylie Cunningham",
-      "price": "-652",
-      "type": "expense"
-    },
-    {
-      "id": "5aa3",
-      "name": "Kelsie Walters",
-      "price": "902",
-      "type": "income"
-    },
-    {
-      "id": "2c0d",
-      "name": "Ivor Martin",
-      "price": "958",
-      "type": "income"
-    },
-    {
-      "id": "7c34",
-      "name": "Zena Snider",
-      "price": "617",
-      "type": "income"
     }
   ]
 }

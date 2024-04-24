@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import Expense from "./components/expense";
 import Input from "./components/input";
@@ -84,6 +84,7 @@ function App() {
         name: inputName.trim(),
         price: inputPrice.trim(),
         type: inputType,
+        id: uuidv4(),
       };
       axios.post("http://localhost:3000/datas", obj);
       console.log(obj);
@@ -136,6 +137,7 @@ function App() {
             total.map((elem: elem) => {
               return (
                 <Expense
+                  key={uuidv4()}
                   elem={elem as any}
                   editName={editName}
                   deleteExp={deleteExp}
